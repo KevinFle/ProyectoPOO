@@ -4,7 +4,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <vector>
-using namespace std;
+#include "escena.h"
 using namespace sf;
 
 class Juego {
@@ -14,15 +14,12 @@ public:
 	void Actualizar();
 	void ProcesarEventos();
 	void dibujar();
+	void SetEscena(escena *siguiente_escena);
 protected:
 	RenderWindow m_window;
-	Texture t_pieza_t;
-	Texture t_pieza_cuadrado;
-	Texture t_pieza_i;
-	Texture t_pieza_L;
-	Texture t_pieza_Z;
-	vector <Sprite> piez;
-	clock_t tiempo;
+	escena *m_escena;
+	escena *m_siguiente_escena=nullptr;
+	
 };
 
 #endif

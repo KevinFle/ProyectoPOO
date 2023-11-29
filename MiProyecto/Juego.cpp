@@ -6,31 +6,26 @@
 #include <vector>
 #include <SFML/System/Clock.hpp>
 #include <ctime>
+#include "menu.h"
 using namespace std;
 using namespace sf;
 
 
 Juego::Juego(): m_window(VideoMode(800,600),"TETRIS") {
 	m_window.setFramerateLimit(60);	
-	t_pieza_t.loadFromFile("t.png");
-	t_pieza_cuadrado.loadFromFile("cuadrado.png");
-	t_pieza_i.loadFromFile("i.png");
-	t_pieza_L.loadFromFile("L.png");
-	t_pieza_Z.loadFromFile("Z.png");
-	Sprite a(t_pieza_L);
-	Sprite b(t_pieza_Z);
-	a.setPosition(rand()%800,0);
-	b.setPosition(rand()%400,0);
-	piez.push_back(a);
-	piez.push_back(b);
-};
+	m_escena = new menu();
+}
 
 void Juego::Run(){
-	tiempo = clock();
 	while(m_window.isOpen()) {
 		ProcesarEventos();
 		Actualizar();
 		dibujar();
+		if (m_siguiente_escena) {
+			delete m_escena;
+			m_escena = m_siguiente_escena;
+			m_siguiente_escena = nullptr;
+		}
 	}
 }
 void Juego::ProcesarEventos(){
@@ -43,31 +38,15 @@ void Juego::ProcesarEventos(){
 }
 void Juego::Actualizar()
 {
-	clock_t tiempo_final = clock();
-	double duration_seconds = static_cast<double>(tiempo_final-tiempo) / CLOCKS_PER_SEC;
-	if(duration_seconds>1)
-	{	
-		for(size_t i=0;i<piez.size();i++) {  
-		piez[i].move(0,10);
-		}
-		tiempo = clock();
-	}
-	for(size_t i=0;i<piez.size();i++) {  ///cambiar cuando tengamos que detectar choques 
-	Vector2f pos = piez[i].getPosition();
-		if(pos.y<510)
-		{
-			
-		}
-	}
+	m_escena->Actualizar(*this);
+	
 }
 
 void Juego::dibujar(){
-	m_window.clear(Color(100,100,100));
-	for(size_t i=0;i<piez.size();i++) 
-	{  
 	
-	piez[i].setScale(0.2,0.2);
-	m_window.draw(piez[i]);
-	}
-	m_window.display();
+	m_escena->Dibujar(m_window);
+}
+void Juego::SetEscena(escena *siguiente_escena)
+{
+	m_siguiente_escena = siguiente_escena;
 }

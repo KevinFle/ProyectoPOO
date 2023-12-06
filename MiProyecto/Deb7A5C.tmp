@@ -1,0 +1,52 @@
+GPP=mingw32-g++
+CXXFLAGS= -fshow-column -fshow-column -fno-diagnostics-show-caret  -g2  -O0 "-IC:\Program Files (x86)\ZinjaI\MinGW32-gcc6\sfml2\include"    -DSFML_STATIC 
+LDFLAGS= -static-libstdc++ -static-libgcc -mwindows "-LC:\Program Files (x86)\ZinjaI\MinGW32-gcc6"   
+OBJS=Debug_Win32\zpr_resource.o Debug_Win32\main.o Debug_Win32\Juego.o Debug_Win32\escena.o Debug_Win32\partida.o Debug_Win32\menu.o Debug_Win32\pieza.o Debug_Win32\tablero.o Debug_Win32\InputText.o Debug_Win32\MjPuntajes.o Debug_Win32\puntajes.o Debug_Win32\Sonidos.o Debug_Win32\GameOver.o 
+
+all: Debug_Win32 Debug_Win32\tetris.exe
+
+clean:
+	del ${OBJS} Debug_Win32\tetris.exe
+
+Debug_Win32\tetris.exe: ${OBJS}
+	${GPP} ${OBJS} ${LDFLAGS} -o $@
+
+Debug_Win32:
+	mkdir Debug_Win32
+
+Debug_Win32\main.o: main.cpp Juego.h escena.h Sonidos.h tablero.h pieza.h
+	${GPP} ${CXXFLAGS} -c main.cpp -o $@
+
+Debug_Win32\Juego.o: Juego.cpp Juego.h escena.h Sonidos.h menu.h InputText.h
+	${GPP} ${CXXFLAGS} -c Juego.cpp -o $@
+
+Debug_Win32\escena.o: escena.cpp escena.h
+	${GPP} ${CXXFLAGS} -c escena.cpp -o $@
+
+Debug_Win32\partida.o: partida.cpp partida.h escena.h tablero.h pieza.h MjPuntajes.h Juego.h Sonidos.h puntajes.h menu.h InputText.h GameOver.h
+	${GPP} ${CXXFLAGS} -c partida.cpp -o $@
+
+Debug_Win32\menu.o: menu.cpp menu.h escena.h InputText.h partida.h tablero.h pieza.h MjPuntajes.h Juego.h Sonidos.h puntajes.h
+	${GPP} ${CXXFLAGS} -c menu.cpp -o $@
+
+Debug_Win32\pieza.o: pieza.cpp pieza.h
+	${GPP} ${CXXFLAGS} -c pieza.cpp -o $@
+
+Debug_Win32\tablero.o: tablero.cpp tablero.h pieza.h
+	${GPP} ${CXXFLAGS} -c tablero.cpp -o $@
+
+Debug_Win32\InputText.o: InputText.cpp
+	${GPP} ${CXXFLAGS} -c InputText.cpp -o $@
+
+Debug_Win32\MjPuntajes.o: MjPuntajes.cpp MjPuntajes.h escena.h Juego.h Sonidos.h puntajes.h menu.h InputText.h
+	${GPP} ${CXXFLAGS} -c MjPuntajes.cpp -o $@
+
+Debug_Win32\puntajes.o: puntajes.cpp puntajes.h
+	${GPP} ${CXXFLAGS} -c puntajes.cpp -o $@
+
+Debug_Win32\Sonidos.o: Sonidos.cpp Sonidos.h
+	${GPP} ${CXXFLAGS} -c Sonidos.cpp -o $@
+
+Debug_Win32\GameOver.o: GameOver.cpp GameOver.h escena.h puntajes.h Juego.h Sonidos.h menu.h InputText.h
+	${GPP} ${CXXFLAGS} -c GameOver.cpp -o $@
+

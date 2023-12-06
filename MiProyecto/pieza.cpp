@@ -3,42 +3,42 @@
 using namespace std;
 
 pieza::pieza() {
-	forma={{{1,1},
+	forma={{{1,1}, ///forma cuadrado
 			{1,1}},
 		
 		{{0,0,0,0,0},
-		{0,0,1,0,0},
+		{0,0,1,0,0}, /// forma s
 		{0,0,1,1,0},
 		{0,0,0,1,0},
 		{0,0,0,0,0}},
 		
 		{{0,0,0,0,0},
 		{0,0,0,1,0},
-		{0,0,1,1,0},
+		{0,0,1,1,0}, /// forma z
 		{0,0,1,0,0},
 		{0,0,0,0,0}},
 			
 		{{0,0,0,0,0},
 		{0,0,1,1,0},
-		{0,0,1,0,0},
+		{0,0,1,0,0}, /// L
 		{0,0,1,0,0},
 		{0,0,0,0,0}},
 			
 		{{0,0,0,0,0},
 		{0,1,1,0,0},
-		{0,0,1,0,0},
+		{0,0,1,0,0}, ///L AL REVES
 		{0,0,1,0,0},	
 		{0,0,0,0,0}},
 			
 		{{0,0,0,0,0},
 		{0,0,1,0,0},
-		{0,0,1,1,0},
+		{0,0,1,1,0}, ///forma T
 		{0,0,1,0,0},	
 		{0,0,0,0,0}},
 			
 		{{0,0,1,0},
 		{0,0,1,0},
-		{0,0,1,0},
+		{0,0,1,0},  /// forma I
 		{0,0,1,0}}};
 }
 
@@ -75,15 +75,3 @@ void pieza::DesRotarPieza(int ind){
 		indJ=0;
 	}
 }
-
-
-//void pieza::Dibujar(RenderWindow &window)
-//{
-//	window.draw(m_sprite);
-//}
-//bool pieza::CollideWith (const pieza &p) const{
-//	auto r1 =this->m_sprite.getGlobalBounds();
-//	auto r2 = p.m_sprite.getGlobalBounds();
-//	return r1.intersects(r2);
-//}
-

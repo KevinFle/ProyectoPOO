@@ -8,6 +8,7 @@ public:
 	escena();
 	virtual void Actualizar(Juego &juego)=0;
 	virtual void Dibujar(RenderWindow &win)=0;
+	virtual void ProcesarEvento(Event &e)=0;
 	
 private:
 };
